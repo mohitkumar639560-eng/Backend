@@ -51,6 +51,15 @@ app.patch('/api/notes/:id', async (req, res) => {
       }
 
 });
+
+app.delete('/api/notes/:id', async (req, res) => {
+    let { id } = req.params;
+    let deletedNote = await NoteModel.findByIdAndDelete(id);
+    if(!deletedNote){
+        return res.status(404).json({ error: "Note not found" });
+    }
+    return res.status(200).json({ message: "Note deleted successfully" });
+}); 
  
 
 
